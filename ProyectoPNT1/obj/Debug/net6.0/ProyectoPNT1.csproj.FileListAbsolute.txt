@@ -270,3 +270,14 @@ C:\Users\ASUS\source\repos\ProyectoPNT1\ProyectoPNT1\obj\Debug\net6.0\refint\Pro
 C:\Users\ASUS\source\repos\ProyectoPNT1\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.pdb
 C:\Users\ASUS\source\repos\ProyectoPNT1\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.genruntimeconfig.cache
 C:\Users\ASUS\source\repos\ProyectoPNT1\ProyectoPNT1\obj\Debug\net6.0\ref\ProyectoPNT1.dll
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.csproj.AssemblyReference.cache
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.AssemblyInfoInputs.cache
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.AssemblyInfo.cs
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.RazorAssemblyInfo.cache
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.RazorAssemblyInfo.cs
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.dll
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\refint\ProyectoPNT1.dll
+C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1\obj\Debug\net6.0\ProyectoPNT1.pdb

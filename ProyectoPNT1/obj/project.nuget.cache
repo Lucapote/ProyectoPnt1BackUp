@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qmZsGOIPgjQBfTAkneUICuVAvyEEJcNAes13/LkS9Gbor/FlTsKl6LW0oOGBAcaQsWorHHB0JZCak5Q+3h0y/g==",
+  "dgSpecHash": "QtAsNlwF/THrIzS30ncrtrX904QZabV/jGok9iNBThsd+lialJGw2Ulg+pcpRk2NCiiDWbCYzs5GZfwTaFnOqg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\source\\repos\\ProyectoPNT1\\ProyectoPNT1\\ProyectoPNT1.csproj",
+  "projectFilePath": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\ProyectoPNT1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

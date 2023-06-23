@@ -11415,11 +11415,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\ProyectoPNT1\\ProyectoPNT1\\ProyectoPNT1.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\ProyectoPNT1.csproj",
       "projectName": "ProyectoPNT1",
-      "projectPath": "C:\\Users\\ASUS\\source\\repos\\ProyectoPNT1\\ProyectoPNT1\\ProyectoPNT1.csproj",
+      "projectPath": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\ProyectoPNT1.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\source\\repos\\ProyectoPNT1\\ProyectoPNT1\\obj\\",
+      "outputPath": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",

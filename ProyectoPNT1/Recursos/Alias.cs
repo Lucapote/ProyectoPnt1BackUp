@@ -9,6 +9,5 @@
         public const string Entrada = "Horario Entrada";
         public const string Salida = "Horario Salida";
         public const string Rol = "Nombre del rol";
-        public const string ConstPassword = "Password";
     }
 }

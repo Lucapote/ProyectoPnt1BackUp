@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
+using ProyectoPNT1.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,14 @@ builder.Services.AddControllersWithViews();
 
 #region ConexionBaseDeDatos
 builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name = DefaultConnection"));
+#endregion
+
+#region identity
+//asi si los dos son asignados
+builder.Services.AddIdentity<Persona, Rol>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+//asi es si queremos dejar uno asignado y otro por defecto
+//builder.Services.AddIdentity<Usuario, IdentityRole<int>>().AddEntityFrameworkStores<ApplicationDbContext>();
 #endregion
 
 var app = builder.Build();
@@ -24,7 +33,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+#region autenticacion con identity
+//agregamos autenticacion
+app.UseAuthentication();
+//antes de la autorizacion
+#endregion
 app.UseAuthorization();
 
 app.MapControllerRoute(

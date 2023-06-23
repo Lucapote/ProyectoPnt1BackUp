@@ -1,0 +1,43 @@
+﻿@using ProyectoPNT1.Recursos;
+@model ProyectoPNT1.Models.Horario
+
+@{
+    ViewData["Title"] = @Nombres.Detalles;
+}
+
+<h1>@Nombres.Detalles</h1>
+
+<div>
+    <h4>Horario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaTrabajo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FechaTrabajo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoraEntrada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoraEntrada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoraSalida)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoraSalida)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tecnico)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tecnico.Apellido)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">@Nombres.Editar</a> |
+    <a asp-action="Index">@Nombres.Volver</a>
+</div>

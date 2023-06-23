@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProyectoPNT1.Models.Horario>
+
+@{
+    ViewData["Title"] = "Horarios Tecnico";
+}
+
+<h1>Horarios filtrados por Técnico</h1>
+
+<h3>Técnico: @ViewData["TecnicoNombre"]</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="IndexByTecnico" asp-route-tecnicoId="@ViewData["TecnicoId"]"
+                   asp-route-sortOrder="@ViewData["FechaSortParm"]">@Html.DisplayNameFor(model => model.FechaTrabajo)</a>
+            </th>
+            <th>
+                <a asp-action="IndexByTecnico" asp-route-tecnicoId="@ViewData["TecnicoId"]"
+                   asp-route-sortOrder="@ViewData["HoraSortParm"]">@Html.DisplayNameFor(model => model.HoraEntrada)</a>
+            </th>
+            <th>@Html.DisplayNameFor(model => model.HoraSalida)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var horario in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => horario.FechaTrabajo)</td>
+                <td>
+                    @if (horario.HoraEntrada == null && horario.HoraSalida == null)
+                    {
+                        <span>Día de descanso</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => horario.HoraEntrada)
+                    }
+                </td>
+                <td>
+                    @if (horario.HoraEntrada == null && horario.HoraSalida == null)
+                    {
+                        <span>Día de descanso</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => horario.HoraSalida)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

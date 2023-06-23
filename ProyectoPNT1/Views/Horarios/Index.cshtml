@@ -1,0 +1,88 @@
+﻿@using ProyectoPNT1.Recursos;
+@model IEnumerable<ProyectoPNT1.Models.Horario>
+
+@{
+    ViewData["Title"] = "Listado Horarios";
+}
+
+<h1>Horarios</h1>
+
+<p>
+    <a asp-action="Create">@Nombres.Agregar</a>
+</p>
+
+<div>
+    <form id="filterForm" style="display: inline-block;">
+        <label for="horaDesde">Hora Desde:</label>
+        <input type="time" id="horaDesde" name="horaDesde" value="@ViewData["HoraDesde"]">
+
+        <label for="horaHasta">Hora Hasta:</label>
+        <input type="time" id="horaHasta" name="horaHasta" value="@ViewData["HoraHasta"]">
+
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <form id="resetForm" asp-action="Index" asp-controller="Horarios" style="display: inline-block;">
+        <button type="submit">Reiniciar</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["FechaSortParm"]">@Html.DisplayNameFor(model => model.FechaTrabajo)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraEntrada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraSalida)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TecnicoSortParm"]">@Html.DisplayNameFor(model => model.Tecnico)</a>
+            </th>
+            <th>
+                @Nombres.Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaTrabajo)
+                </td>
+                <td>
+                    @if (item.HoraEntrada == null && item.HoraSalida == null)
+                    {
+                        <span>Día de descanso</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.HoraEntrada)
+                    }
+                </td>
+                <td>
+                    @if (item.HoraEntrada == null && item.HoraSalida == null)
+                    {
+                        <span>Día de descanso</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.HoraSalida)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tecnico.Apellido)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">@Nombres.Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">@Nombres.Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">@Nombres.Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

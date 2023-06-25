@@ -80,7 +80,50 @@ namespace ProyectoPNT1.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+                // Redirecciona al método "Edit" del controlador "PersonasController" con el ID de la persona registrada
+                return RedirectToAction("Edit", "Personas", new { id = user.Id });
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(viewModel);
+            }
+        }
+
+        [Authorize]
+        public IActionResult RegistrarTecnico()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegistrarTecnico(RegistroTecnico viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var tecnico = new Tecnico
+            {
+                UserName = viewModel.Email,
+                Email = viewModel.Email,
+                Nombre = viewModel.Nombre,
+                Apellido = viewModel.Apellido,
+                Dni = viewModel.Dni,
+                Direccion = viewModel.Direccion
+            };
+
+            var result = await _userManager.CreateAsync(tecnico, viewModel.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(tecnico, isPersistent: false);
+                return RedirectToAction("Edit", "Tecnicos", new {id = tecnico.Id});
             }
             else
             {

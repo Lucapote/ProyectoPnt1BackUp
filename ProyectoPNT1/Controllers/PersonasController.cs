@@ -92,7 +92,19 @@ namespace ProyectoPNT1.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    var existingPersona = await _context.Persona.FindAsync(id);
+                    if (existingPersona == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Actualizar las propiedades de existingPersona con los valores de persona
+                    existingPersona.Nombre = persona.Nombre;
+                    existingPersona.Apellido = persona.Apellido;
+                    existingPersona.Email = persona.Email;
+                    existingPersona.Telefono = persona.Telefono;
+
+                    _context.Update(existingPersona);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -110,6 +122,7 @@ namespace ProyectoPNT1.Controllers
             }
             return View(persona);
         }
+
 
         // GET: Personas/Delete/5
         public async Task<IActionResult> Delete(int? id)

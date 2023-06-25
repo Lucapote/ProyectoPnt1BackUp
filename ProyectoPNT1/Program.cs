@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
@@ -17,6 +19,15 @@ builder.Services.AddIdentity<Persona, Rol>().AddEntityFrameworkStores<Applicatio
 
 //asi es si queremos dejar uno asignado y otro por defecto
 //builder.Services.AddIdentity<Usuario, IdentityRole<int>>().AddEntityFrameworkStores<ApplicationDbContext>();
+#endregion
+
+#region manejo restricciones
+//aca redireccionamos a donde querramos que se necesiten logear o se le deniegue el acceso
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opciones =>
+{
+    opciones.LoginPath = "/Cuentas/IniciarSesion";
+    opciones.AccessDeniedPath = "/Cuentas/IniciarSesion";
+});
 #endregion
 
 var app = builder.Build();

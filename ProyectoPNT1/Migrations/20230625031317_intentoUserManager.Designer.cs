@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoPNT1.Data;
 
@@ -11,9 +12,11 @@ using ProyectoPNT1.Data;
 namespace ProyectoPNT1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230625031317_intentoUserManager")]
+    partial class intentoUserManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,7 +266,7 @@ namespace ProyectoPNT1.Migrations
 
                     b.HasIndex("TecnicoId");
 
-                    b.ToTable("Horario", (string)null);
+                    b.ToTable("Horario");
                 });
 
             modelBuilder.Entity("ProyectoPNT1.Models.Rol", b =>

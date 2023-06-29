@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
 using ProyectoPNT1.Recursos;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,11 +58,12 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-#region crear usuario para cuando se inicializa la aplicacion
-// Agregar el usuario por defecto
+#region crear usuario para cuando se inicializa la aplicacion y asignar los roles
+// Agregar el usuario por defecto y asignar los roles
 using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
 {
     var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<Persona>>();
+    var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<Rol>>();
     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
     // Verificar si el usuario predeterminado ya existe
@@ -80,7 +83,28 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
 
     // Asegurarse de que la base de datos esté creada
     dbContext.Database.EnsureCreated();
+
+    // Crear los roles si no existen
+    foreach (var nombreRol in Enum.GetNames(typeof(RolesEnum)))
+    {
+        if (!await roleManager.RoleExistsAsync(nombreRol))
+        {
+            await roleManager.CreateAsync(new Rol { Name = nombreRol });
+        }
+    }
+
+    // Asignar los roles al usuario por defecto
+    foreach (var roleName in Enum.GetNames(typeof(RolesEnum)))
+    {
+        await userManager.AddToRoleAsync(usuarioPorDefecto, roleName);
+    }
 }
+
+#endregion
+
+#region
+
+
 #endregion
 
 app.Run();

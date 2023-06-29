@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
+using ProyectoPNT1.Recursos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,5 +55,32 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+#region crear usuario para cuando se inicializa la aplicacion
+// Agregar el usuario por defecto
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<Persona>>();
+    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    // Verificar si el usuario predeterminado ya existe
+    var usuarioPorDefecto = await userManager.FindByNameAsync(UXD.Email);
+    if (usuarioPorDefecto == null)
+    {
+        // Crear el usuario predeterminado
+        usuarioPorDefecto = new Persona
+        {
+            UserName = UXD.Email,
+            Email = UXD.Email,
+            Nombre = UXD.Nombre,
+            Apellido = UXD.Apellido
+        };
+        await userManager.CreateAsync(usuarioPorDefecto, UXD.Password); // Establecer la contraseña deseada
+    }
+
+    // Asegurarse de que la base de datos esté creada
+    dbContext.Database.EnsureCreated();
+}
+#endregion
 
 app.Run();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
@@ -8,10 +9,12 @@ namespace ProyectoPNT1.Controllers
     public class PersonasController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Persona> _userManager;
 
-        public PersonasController(ApplicationDbContext context)
+        public PersonasController(ApplicationDbContext context, UserManager<Persona> userManager)
         {
             _context = context;
+            this._userManager = userManager;
         }
 
         // GET: Personas
@@ -92,19 +95,27 @@ namespace ProyectoPNT1.Controllers
             {
                 try
                 {
-                    var existingPersona = await _context.Persona.FindAsync(id);
-                    if (existingPersona == null)
+                    var personaExistente = await _context.Persona.FindAsync(id);
+                    if (personaExistente == null)
                     {
                         return NotFound();
                     }
 
                     // Actualizar las propiedades de existingPersona con los valores de persona
-                    existingPersona.Nombre = persona.Nombre;
-                    existingPersona.Apellido = persona.Apellido;
-                    existingPersona.Email = persona.Email;
-                    existingPersona.Telefono = persona.Telefono;
+                    personaExistente.Nombre = persona.Nombre;
+                    personaExistente.Apellido = persona.Apellido;
+                    personaExistente.Email = persona.Email;
+                    personaExistente.Telefono = persona.Telefono;
 
-                    _context.Update(existingPersona);
+                    // Actualizar el UserName del IdentityUser con el nuevo Email
+                    var usuarioExistente = await _userManager.FindByEmailAsync(personaExistente.Email);
+                    if (usuarioExistente != null)
+                    {
+                        usuarioExistente.UserName = persona.Email;
+                        await _userManager.UpdateAsync(usuarioExistente);
+                    }
+
+                    _context.Update(personaExistente);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

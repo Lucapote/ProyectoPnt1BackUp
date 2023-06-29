@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
@@ -8,10 +9,12 @@ namespace ProyectoPNT1.Controllers
     public class TecnicosController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Persona> _userManager;
 
-        public TecnicosController(ApplicationDbContext context)
+        public TecnicosController(ApplicationDbContext context, UserManager<Persona> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Tecnicos
@@ -92,7 +95,33 @@ namespace ProyectoPNT1.Controllers
             {
                 try
                 {
-                    _context.Update(tecnico);
+                    var tecnicoExistente = await _context.Tecnico.FindAsync(id);
+                    if (tecnicoExistente == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Volver a cargar los datos de la entidad desde la base de datos
+                    _context.Entry(tecnicoExistente).Reload();
+
+                    // Actualizar las propiedades de existingTecnico con los valores de tecnico
+                    tecnicoExistente.Dni = tecnico.Dni;
+                    tecnicoExistente.Direccion = tecnico.Direccion;
+                    tecnicoExistente.Nombre = tecnico.Nombre;
+                    tecnicoExistente.Apellido = tecnico.Apellido;
+                    tecnicoExistente.Email = tecnico.Email;
+                    tecnicoExistente.UserName = tecnico.Email;
+                    tecnicoExistente.Telefono = tecnico.Telefono;
+
+                    // Actualizar el UserName del IdentityUser con el nuevo Email
+                    var usuarioExistente = await _userManager.FindByEmailAsync(tecnicoExistente.Email);
+                    if (usuarioExistente != null)
+                    {
+                        usuarioExistente.UserName = tecnico.Email;
+                        await _userManager.UpdateAsync(usuarioExistente);
+                    }
+
+                    _context.Update(tecnicoExistente);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -111,8 +140,9 @@ namespace ProyectoPNT1.Controllers
             return View(tecnico);
         }
 
+
         // GET: Tecnicos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)    
         {
             if (id == null || _context.Tecnico == null)
             {

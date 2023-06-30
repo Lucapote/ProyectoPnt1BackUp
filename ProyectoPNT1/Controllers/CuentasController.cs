@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
 using ProyectoPNT1.Recursos;
 using ProyectoPNT1.ViewModel;
@@ -9,13 +12,17 @@ namespace ProyectoPNT1.Controllers
 {
     public class CuentasController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly SignInManager<Persona> _signInManager;
         private readonly UserManager<Persona> _userManager;
+        private readonly RoleManager<Rol> _roleManager;
 
-        public CuentasController(SignInManager<Persona> signInManager, UserManager<Persona> userManager)
+        public CuentasController(ApplicationDbContext context ,SignInManager<Persona> signInManager, UserManager<Persona> userManager, RoleManager<Rol> roleManager)
         {
+            this._context = context;
             this._signInManager = signInManager;
             this._userManager = userManager;
+            this._roleManager = roleManager;
         }
         public IActionResult IniciarSesion(string returnUrl)
         {
@@ -139,6 +146,80 @@ namespace ProyectoPNT1.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> AsignarRoles()
+        {
+            var usuarios = await _userManager.Users.ToListAsync();
+            var viewModel = new AsignarRoles
+            {
+                Usuarios = usuarios.Select(u => new SelectListItem { Value = u.Id.ToString(), Text = $"{u.Nombre} {u.Apellido}" }).ToList(),
+                Roles = _roleManager.Roles.Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AsignarRoles(AsignarRoles viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Usuarios = await _userManager.Users
+                    .Select(u => new SelectListItem { Value = u.Id.ToString(), Text = $"{u.Nombre} {u.Apellido}" })
+                    .ToListAsync();
+                viewModel.Roles = _roleManager.Roles
+                    .Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
+                return View(viewModel);
+            }
+
+            var usuario = await _userManager.FindByIdAsync(viewModel.UsuarioId.ToString());
+            if (usuario == null)
+            {
+                ModelState.AddModelError(string.Empty, ErrorMsg.MissMatchUser);
+                viewModel.Usuarios = await _userManager.Users
+                    .Select(u => new SelectListItem { Value = u.Id.ToString(), Text = $"{u.Nombre} {u.Apellido}" })
+                    .ToListAsync();
+                viewModel.Roles = _roleManager.Roles
+                    .Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
+                return View(viewModel);
+            }
+
+            if (!string.IsNullOrEmpty(viewModel.Rol))
+            {
+                // Eliminar todos los roles existentes del usuario
+                var rolesUsuario = await _userManager.GetRolesAsync(usuario);
+                await _userManager.RemoveFromRolesAsync(usuario, rolesUsuario);
+
+                // Asignar el nuevo rol seleccionado al usuario
+                await _userManager.AddToRoleAsync(usuario, viewModel.Rol);
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, ErrorMsg.MissingRole);
+                viewModel.Usuarios = await _userManager.Users
+                    .Select(u => new SelectListItem { Value = u.Id.ToString(), Text = $"{u.Nombre} {u.Apellido}" })
+                    .ToListAsync();
+                viewModel.Roles = _roleManager.Roles
+                    .Select(r => new SelectListItem { Value = r.Name, Text = r.Name }).ToList();
+                return View(viewModel);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> QuitarRol(int usuarioId)
+        {
+            var usuario = await _userManager.FindByIdAsync(usuarioId.ToString());
+
+            if (usuario != null)
+            {
+                var rolesUsuario = await _userManager.GetRolesAsync(usuario);
+                await _userManager.RemoveFromRolesAsync(usuario, rolesUsuario);
+            }
+
+            return RedirectToAction("AsignarRoles");
         }
     }
 }

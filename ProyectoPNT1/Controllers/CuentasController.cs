@@ -75,7 +75,7 @@ namespace ProyectoPNT1.Controllers
                 return View(viewModel);
             }
 
-            var user = new Persona
+            var usuario = new Persona
             {
                 UserName = viewModel.Email,
                 Email = viewModel.Email,
@@ -83,22 +83,26 @@ namespace ProyectoPNT1.Controllers
                 Apellido = viewModel.Apellido
             };
 
-            var result = await _userManager.CreateAsync(user, viewModel.Password);
-            if (result.Succeeded)
+            var resultado = await _userManager.CreateAsync(usuario, viewModel.Password);
+            if (resultado.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                // Redirecciona al método "Edit" del controlador "PersonasController" con el ID de la persona registrada
-                return RedirectToAction("Edit", "Personas", new { id = user.Id });
+                // Asignar rol "Admin" o "Dispatcher" según la selección del usuario
+                var rol = viewModel.EsAdmin ? "Admin" : "Dispatcher";
+                await _userManager.AddToRoleAsync(usuario, rol);
+
+                await _signInManager.SignInAsync(usuario, isPersistent: false);
+                return RedirectToAction("Edit", "Personas", new { id = usuario.Id });
             }
             else
             {
-                foreach (var error in result.Errors)
+                foreach (var error in resultado.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return View(viewModel);
             }
         }
+
 
         [Authorize]
         public IActionResult RegistrarTecnico()
@@ -130,7 +134,11 @@ namespace ProyectoPNT1.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(tecnico, isPersistent: false);
-                return RedirectToAction("Edit", "Tecnicos", new {id = tecnico.Id});
+
+                // Asignar rol "Tecnico" al usuario
+                await _userManager.AddToRoleAsync(tecnico, "Tecnico");
+
+                return RedirectToAction("Edit", "Tecnicos", new { id = tecnico.Id });
             }
             else
             {
@@ -141,6 +149,7 @@ namespace ProyectoPNT1.Controllers
                 return View(viewModel);
             }
         }
+
 
         public async Task<IActionResult> CerrarSesion()
         {

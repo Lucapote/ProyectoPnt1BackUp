@@ -85,25 +85,18 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
     dbContext.Database.EnsureCreated();
 
     // Crear los roles si no existen
-    foreach (var nombreRol in Enum.GetNames(typeof(RolesEnum)))
+    foreach (var roleName in Enum.GetNames(typeof(RolesEnum)))
     {
-        if (!await roleManager.RoleExistsAsync(nombreRol))
+        if (!await roleManager.RoleExistsAsync(roleName))
         {
-            await roleManager.CreateAsync(new Rol { Name = nombreRol });
+            await roleManager.CreateAsync(new Rol { Name = roleName });
         }
     }
 
     // Asignar los roles al usuario por defecto
-    foreach (var roleName in Enum.GetNames(typeof(RolesEnum)))
-    {
-        await userManager.AddToRoleAsync(usuarioPorDefecto, roleName);
-    }
+
+    await userManager.AddToRoleAsync(usuarioPorDefecto, UXD.Rol);
 }
-
-#endregion
-
-#region
-
 
 #endregion
 

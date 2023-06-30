@@ -6,5 +6,6 @@
         public const string Nombre = "Administrador";
         public const string Apellido = "Por Defecto";
         public const string Password = "Colores1!";
+        public const string Rol = "Admin";
     }
 }

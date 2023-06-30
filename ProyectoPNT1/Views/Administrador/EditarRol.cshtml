@@ -1,0 +1,21 @@
+﻿@using ProyectoPNT1.ViewModel;
+@model EditarRol
+
+@{
+    ViewData["Title"] = "Editar Rol";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Usuario: @Model.UserName</h4>
+
+<form asp-action="EditarRol">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label>Rol</label>
+        <select asp-for="SelectedRole" asp-items="@Model.Roles" class="form-control"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

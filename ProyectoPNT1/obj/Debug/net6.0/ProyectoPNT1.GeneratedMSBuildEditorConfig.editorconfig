@@ -16,8 +16,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ASUS\Source\Repos\ProyectoPnt1BackUp\ProyectoPNT1
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/ASUS/Source/Repos/ProyectoPnt1BackUp/ProyectoPNT1/Views/Cuentas/AsignarRoles.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VlbnRhc1xBc2lnbmFyUm9sZXMuY3NodG1s
+[C:/Users/ASUS/Source/Repos/ProyectoPnt1BackUp/ProyectoPNT1/Views/Administrador/EditarRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxFZGl0YXJSb2wuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Source/Repos/ProyectoPnt1BackUp/ProyectoPNT1/Views/Administrador/ListadoUsuarios.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxMaXN0YWRvVXN1YXJpb3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ASUS/Source/Repos/ProyectoPnt1BackUp/ProyectoPNT1/Views/Cuentas/IniciarSesion.cshtml]

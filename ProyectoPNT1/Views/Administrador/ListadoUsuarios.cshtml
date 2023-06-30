@@ -1,0 +1,30 @@
+﻿@using ProyectoPNT1.ViewModel;
+@model List<UsuarioConRol>
+
+@{
+    ViewData["Title"] = "Listado de Usuarios";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.RoleName</td>
+                <td>
+                    <a asp-action="EditarRol" asp-route-id="@user.UserId">Editar Rol</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

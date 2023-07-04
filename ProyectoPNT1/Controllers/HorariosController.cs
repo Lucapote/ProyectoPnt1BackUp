@@ -16,7 +16,6 @@ namespace ProyectoPNT1.Controllers
         {
             _context = context;
         }
-
         public async Task<IActionResult> Index(string sortOrder, TimeSpan? horaDesde, TimeSpan? horaHasta)
         {
             var horarios = _context.Horario.AsQueryable();

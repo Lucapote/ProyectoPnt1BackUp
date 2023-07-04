@@ -27,6 +27,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Personas/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Persona == null)
@@ -132,7 +133,7 @@ namespace ProyectoPNT1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(persona);
         }

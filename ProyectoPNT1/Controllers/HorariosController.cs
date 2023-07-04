@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
+using System.Data;
 
 namespace ProyectoPNT1.Controllers
 {
@@ -99,10 +101,8 @@ namespace ProyectoPNT1.Controllers
             return View(await horariosOrdenados.ToListAsync());
         }
 
-
-
-
         // GET: Horarios/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Horario == null)
@@ -122,6 +122,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Horarios/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["TecnicoId"] = new SelectList(_context.Tecnico, "Id", "Apellido");
@@ -133,6 +134,7 @@ namespace ProyectoPNT1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Id,FechaTrabajo,HoraEntrada,HoraSalida,TecnicoId")] Horario horario)
         {
             if (ModelState.IsValid)
@@ -146,6 +148,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Horarios/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Horario == null)
@@ -165,6 +168,7 @@ namespace ProyectoPNT1.Controllers
         // POST: Horarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FechaTrabajo,HoraEntrada,HoraSalida,TecnicoId")] Horario horario)
@@ -199,6 +203,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Horarios/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Horario == null)
@@ -218,6 +223,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // POST: Horarios/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

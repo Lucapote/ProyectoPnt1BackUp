@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
+using System.Data;
 
 namespace ProyectoPNT1.Controllers
 {
@@ -24,6 +26,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Tecnicos/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Tecnico == null)
@@ -42,6 +45,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Tecnicos/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -50,6 +54,7 @@ namespace ProyectoPNT1.Controllers
         // POST: Tecnicos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Dni,Direccion,Id,Nombre,Apellido,Email,Password,ConfirmPassword,Telefono")] Tecnico tecnico)
@@ -64,6 +69,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // GET: Tecnicos/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Tecnico == null)
@@ -82,6 +88,7 @@ namespace ProyectoPNT1.Controllers
         // POST: Tecnicos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Dni,Direccion,Id,Nombre,Apellido,Email,Password,ConfirmPassword,Telefono")] Tecnico tecnico)
@@ -142,6 +149,7 @@ namespace ProyectoPNT1.Controllers
 
 
         // GET: Tecnicos/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)    
         {
             if (id == null || _context.Tecnico == null)
@@ -160,6 +168,7 @@ namespace ProyectoPNT1.Controllers
         }
 
         // POST: Tecnicos/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

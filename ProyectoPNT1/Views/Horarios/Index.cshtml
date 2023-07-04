@@ -6,10 +6,14 @@
 }
 
 <h1>Horarios</h1>
+<hr />
 
-<p>
-    <a asp-action="Create">@Nombres.Agregar</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">@Nombres.Agregar</a>
+    </p>
+}
 
 <div>
     <form id="filterForm" style="display: inline-block;">
@@ -42,9 +46,12 @@
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["TecnicoSortParm"]">@Html.DisplayNameFor(model => model.Tecnico)</a>
             </th>
-            <th>
-                @Nombres.Acciones
-            </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    @Nombres.Acciones
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -77,11 +84,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Tecnico.Apellido)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">@Nombres.Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">@Nombres.Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">@Nombres.Borrar</a>
-                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Nombres.Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">@Nombres.Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@Nombres.Borrar</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

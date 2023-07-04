@@ -9,6 +9,7 @@ using ProyectoPNT1.ViewModel;
 
 namespace ProyectoPNT1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdministradorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,7 +21,6 @@ namespace ProyectoPNT1.Controllers
             this._userManager = userManager;
         }
 
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ListadoUsuarios()
         {
             var usuariosConRoles = await _context.Users.ToListAsync();
@@ -42,8 +42,6 @@ namespace ProyectoPNT1.Controllers
             return View(viewModel);
         }
 
-
-        [Authorize(Roles = "Admin")]
         public IActionResult EditarRol(int id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);
@@ -58,7 +56,6 @@ namespace ProyectoPNT1.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarRol(EditarRol viewModel)

@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPNT1.Data;
 using ProyectoPNT1.Models;
+using System.Data;
 
 namespace ProyectoPNT1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PersonasController : Controller
     {
         private readonly ApplicationDbContext _context;

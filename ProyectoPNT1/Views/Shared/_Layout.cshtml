@@ -21,16 +21,10 @@
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
-                            @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Personas" asp-action="Index">Personas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tecnicos" asp-action="Index">Tecnicos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
                                 </li>
                                 <li class="nav-item">
                                     <div class="dropdown">
@@ -49,6 +43,15 @@
                                             </li>
                                         </ul>
                                     </div>
+                                </li>
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Tecnicos" asp-action="Index">Tecnicos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Horarios" asp-action="Index">Horarios</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Cuentas" asp-action="CerrarSesion">Cerrar Sesion</a>

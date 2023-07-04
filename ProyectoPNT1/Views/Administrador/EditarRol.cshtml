@@ -5,17 +5,19 @@
     ViewData["Title"] = "Editar Rol";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h1>@ViewData["Title"]</h1>
+<hr />
 
 <h4>Usuario: @Model.UserName</h4>
+<hr />
 
 <form asp-action="EditarRol">
     <input type="hidden" asp-for="UserId" />
 
-    <div class="form-group">
-        <label>Rol</label>
+    <div class="form-group col-md-4">
+        <label asp-for="Roles" class="control-label"></label>
         <select asp-for="SelectedRole" asp-items="@Model.Roles" class="form-control"></select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
 </form>

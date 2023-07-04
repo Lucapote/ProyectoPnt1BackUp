@@ -6,6 +6,15 @@
     color: #27241F;
 }
 
+h1, h2, h3, h4, p, label {
+    color: #27241F;
+}
+
+a {
+    color: #4e8df5;
+    text-decoration: none;
+}
+
 .navegador {
     background-color: #DB995F;
 }
@@ -21,8 +30,47 @@
 }
 
 .footer {
-    background-color: black;
+    background-color: #A72422;
     color: white;
     padding: 20px;
     margin-top: auto;
+}
+
+p{
+    margin: 0;
+}
+
+.parrafoFooter{
+    color:white;
+}
+
+#filterForm label {
+    color: #27241F;
+}
+
+#filterForm input[type="time"] {
+    background-color: #DB995F;
+    color: #27241F;
+    border: none;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+#filterForm button[type="submit"] {
+    background-color: #D82E29;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#resetForm button[type="submit"] {
+    background-color: #A72422;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "x9VNeiIX2o3XnXrIRrX9NrX/sRi/qyfXP2QVpFp13z4=",
+  "Hash": "rjVmJttrQDCbUeYUEIXB/1LTT9mug3x1MMsQ1MNptaA=",
   "Source": "ProyectoPNT1",
   "BasePath": "_content/ProyectoPNT1",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\ProyectoPNT1.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\wwwroot\\css\\estilos.css",
+      "SourceId": "ProyectoPNT1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\wwwroot\\",
+      "BasePath": "_content/ProyectoPNT1",
+      "RelativePath": "css/estilos.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\estilos.css"
     },
     {
       "Identity": "C:\\Users\\ASUS\\Source\\Repos\\ProyectoPnt1BackUp\\ProyectoPNT1\\wwwroot\\css\\site.css",

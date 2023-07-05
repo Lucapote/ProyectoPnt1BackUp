@@ -144,7 +144,7 @@ namespace ProyectoPNT1.Migrations
                 defaultValue: false);
 
             migrationBuilder.AddColumn<string>(
-                name: "UserName",
+                name: "NombreUsuario",
                 table: "Usuarios",
                 type: "nvarchar(256)",
                 maxLength: 256,
@@ -296,12 +296,12 @@ namespace ProyectoPNT1.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
                 table: "AspNetUserClaims",
-                column: "UserId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
                 table: "AspNetUserLogins",
-                column: "UserId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonasRoles_RoleId",
@@ -410,7 +410,7 @@ namespace ProyectoPNT1.Migrations
                 table: "Usuarios");
 
             migrationBuilder.DropColumn(
-                name: "UserName",
+                name: "NombreUsuario",
                 table: "Usuarios");
 
             migrationBuilder.RenameTable(

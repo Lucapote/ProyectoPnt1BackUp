@@ -8,15 +8,15 @@
 <h1>@ViewData["Title"]</h1>
 <hr />
 
-<h4>Usuario: @Model.UserName</h4>
+<h4>Usuario: @Model.NombreUsuario</h4>
 <hr />
 
 <form asp-action="EditarRol">
-    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="UsuarioId" />
 
     <div class="form-group col-md-4">
         <label asp-for="Roles" class="control-label"></label>
-        <select asp-for="SelectedRole" asp-items="@Model.Roles" class="form-control"></select>
+        <select asp-for="RolSeleccionado" asp-items="@Model.Roles" class="form-control"></select>
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Guardar</button>

@@ -4,9 +4,9 @@ namespace ProyectoPNT1.ViewModel
 {
     public class EditarRol
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string SelectedRole { get; set; }
+        public int UsuarioId { get; set; }
+        public string NombreUsuario { get; set; }
+        public string RolSeleccionado { get; set; }
         public SelectList Roles { get; set; }
     }
 }

@@ -44,12 +44,12 @@ namespace ProyectoPNT1.Controllers
 
         public IActionResult EditarRol(int id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            var usuario = _context.Users.FirstOrDefault(u => u.Id == id);
             var roles = _context.Roles.Select(r => r.Name).ToList();
             var viewModel = new EditarRol
             {
-                UserId = user.Id,
-                UserName = user.UserName,
+                UsuarioId = usuario.Id,
+                NombreUsuario = usuario.UserName,
                 Roles = new SelectList(roles)
             };
 
@@ -60,16 +60,16 @@ namespace ProyectoPNT1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarRol(EditarRol viewModel)
         {
-            var user = await _userManager.FindByIdAsync(viewModel.UserId.ToString());
+            var usuario = await _userManager.FindByIdAsync(viewModel.UsuarioId.ToString());
 
             if (ModelState.IsValid)
             {
                 // Eliminar el rol actual del usuario
-                var currentRoles = await _userManager.GetRolesAsync(user);
-                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                var currentRoles = await _userManager.GetRolesAsync(usuario);
+                await _userManager.RemoveFromRolesAsync(usuario, currentRoles);
 
                 // Agregar el nuevo rol seleccionado al usuario
-                await _userManager.AddToRoleAsync(user, viewModel.SelectedRole);
+                await _userManager.AddToRoleAsync(usuario, viewModel.RolSeleccionado);
 
                 return RedirectToAction("ListadoUsuarios");
             }

@@ -5,26 +5,28 @@
 }
 
 <h1>Calcular Horas Asignadas</h1>
+<hr />
 
-@using (Html.BeginForm())
-{
-    <div>
-        <label for="FechaInicio">Fecha de inicio:</label>
-        <input type="date" id="FechaInicio" name="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" required />
-    </div>
+<div>
+    <form asp-action="CalcularTotalHoras" method="post" id="filterForm" class="mb-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="FechaInicio">Fecha de inicio:</label>
+                <input type="date" id="FechaInicio" name="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" required class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="FechaFin">Fecha de fin:</label>
+                <input type="date" id="FechaFin" name="FechaFin" value="@Model.FechaFin.ToString("yyyy-MM-dd")" required class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Calcular</button>
+    </form>
 
-    <div>
-        <label for="FechaFin">Fecha de fin:</label>
-        <input type="date" id="FechaFin" name="FechaFin" value="@Model.FechaFin.ToString("yyyy-MM-dd")" required />
-    </div>
-
-    <button type="submit">Calcular</button>
-}
-
-@if (Model.TotalHorasMostrar > 0)
-{
-    <div>
-        <h3>Total de horas asignadas:</h3>
-        <p>@Model.TotalHorasMostrar</p>
-    </div>
-}
+    @if (Model.TotalHorasMostrar > 0)
+    {
+        <div id="totalHorasDiv">
+            <h3>Horas asignadas:</h3>
+            <h4>@Model.TotalHorasMostrar</h4>
+        </div>
+    }
+</div>

@@ -44,6 +44,11 @@ p{
     color:white;
 }
 
+#filterForm,
+#resetForm {
+    display: inline-block;
+}
+
 #filterForm label {
     color: #27241F;
 }

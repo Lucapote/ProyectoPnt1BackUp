@@ -16,7 +16,7 @@
 }
 
 <div>
-    <form id="filterForm" style="display: inline-block;">
+    <form id="filterForm">
         <label for="horaDesde">Hora Desde:</label>
         <input type="time" id="horaDesde" name="horaDesde" value="@ViewData["HoraDesde"]">
 
@@ -26,7 +26,7 @@
         <button type="submit">Filtrar</button>
     </form>
 
-    <form id="resetForm" asp-action="Index" asp-controller="Horarios" style="display: inline-block;">
+    <form id="resetForm" asp-action="Index" asp-controller="Horarios">
         <button type="submit">Reiniciar</button>
     </form>
 </div>

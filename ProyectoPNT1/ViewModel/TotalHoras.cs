@@ -23,6 +23,12 @@ namespace ProyectoPNT1.ViewModel
         [Display(Name = "Fecha de fin")]
         public DateTime FechaFin { get; set; }
 
+        [Display(Name = "Valor de la hora")]
+        public double? ValorHora { get; set; }
+
+        [Display(Name = "Estimado de salarios")]
+        public double EstimadoSalarios { get; set; }
+
         public double TotalHorasMostrar { get; set; }
     }
 }

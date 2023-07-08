@@ -35,10 +35,16 @@ public class FuncionalidadesController : Controller
             double totalHoras = horarios
                 .Sum(h => h.HoraSalida.HasValue && h.HoraEntrada.HasValue ? (h.HoraSalida.Value - h.HoraEntrada.Value).TotalHours : 0);
 
-
             viewModel.TotalHorasMostrar = totalHoras;
+
+            if (viewModel.ValorHora.HasValue)
+            {
+                double estimadoSalarios = totalHoras * viewModel.ValorHora.Value;
+                viewModel.EstimadoSalarios = estimadoSalarios;
+            }
         }
 
         return View(viewModel);
     }
+
 }

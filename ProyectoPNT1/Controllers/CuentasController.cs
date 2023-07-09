@@ -90,7 +90,12 @@ namespace ProyectoPNT1.Controllers
                 var rol = viewModel.EsAdmin ? "Admin" : "Dispatcher";
                 await _userManager.AddToRoleAsync(usuario, rol);
 
-                await _signInManager.SignInAsync(usuario, isPersistent: false);
+                #region logearse automaticamente
+                //en esta linea cuando el registro es satisfactorio automaticamente se inicia sesion
+                //en esta aplicacion la verdad no nos interesa, porque los registra el admin entonces la comentaremos
+                //await _signInManager.SignInAsync(usuario, isPersistent: false);
+                #endregion
+
                 return RedirectToAction("Edit", "Personas", new { id = usuario.Id });
             }
             else
@@ -133,7 +138,11 @@ namespace ProyectoPNT1.Controllers
             var result = await _userManager.CreateAsync(tecnico, viewModel.Password);
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(tecnico, isPersistent: false);
+                #region logearse automaticamente
+                //en esta linea cuando el registro es satisfactorio automaticamente se inicia sesion
+                //en esta aplicacion la verdad no nos interesa, porque los registra el admin entonces la comentaremos
+                //await _signInManager.SignInAsync(tecnico, isPersistent: false);
+                #endregion
 
                 // Asignar rol "Tecnico" al usuario
                 await _userManager.AddToRoleAsync(tecnico, "Tecnico");

@@ -13,5 +13,10 @@
         public const string Crear = "Crear";
         public const string Confirmar = "Estas seguro que queres borrar este elemento?";
         public const string NombreProyecto = "Scheduler";
+        public const string RegistrarAdmin = "Registrar como Administrador";
+        public const string FechaInicio = "Fecha de Inicio";
+        public const string FechaFin = "Fecha de Fin";
+        public const string ValorHora = "Valor de la Hora";
+
     }
 }

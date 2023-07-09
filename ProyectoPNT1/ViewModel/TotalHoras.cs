@@ -1,4 +1,5 @@
 ﻿using ProyectoPNT1.Models;
+using ProyectoPNT1.Recursos;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoPNT1.ViewModel
@@ -16,19 +17,18 @@ namespace ProyectoPNT1.ViewModel
         FechaFin = ultimoDiaSemana;
         }
 
-        [Required(ErrorMessage = "La fecha de inicio es obligatoria.")]
-        [Display(Name = "Fecha de inicio")]
+        [Required(ErrorMessage = ErrorMsg.Required)]
+        [Display(Name = Nombres.FechaInicio)]
         public DateTime FechaInicio { get; set; }
 
-        [Required(ErrorMessage = "La fecha de fin es obligatoria.")]
-        [Display(Name = "Fecha de fin")]
+        [Required(ErrorMessage = ErrorMsg.Required)]
+        [Display(Name = Nombres.FechaFin)]
         public DateTime FechaFin { get; set; }
 
         #region Valor Horas y donde se mostraria el estimado de salarios
-        [Display(Name = "Valor de la hora")]
+        [Display(Name = Nombres.ValorHora)]
         public double? ValorHora { get; set; }
 
-        [Display(Name = "Estimado de salarios")]
         public double EstimadoSalarios { get; set; }
         #endregion
         public double TotalHorasMostrar { get; set; }

@@ -19,6 +19,16 @@
                 <input type="date" id="FechaFin" name="FechaFin" value="@Model.FechaFin.ToString("yyyy-MM-dd")" required class="form-control">
             </div>
         </div>
+        <div class="col-md-6">
+            <label for="TecnicoId">Técnico:</label>
+            <select id="TecnicoId" name="TecnicoId" asp-for="TecnicoId" class="form-control">
+                <option value="">Seleccione un técnico...</option>
+                @foreach (var tecnico in Model.Tecnicos)
+                {
+                    <option value="@tecnico.Id" selected="@(tecnico.Id == Model.TecnicoId)">@(tecnico.Nombre)</option>
+                }
+            </select>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <label for="ValorHora">Valor de la hora:</label>

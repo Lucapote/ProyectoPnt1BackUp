@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProyectoPNT1.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoPNT1.ViewModel
 {
@@ -23,12 +24,20 @@ namespace ProyectoPNT1.ViewModel
         [Display(Name = "Fecha de fin")]
         public DateTime FechaFin { get; set; }
 
+        #region Valor Horas y donde se mostraria el estimado de salarios
         [Display(Name = "Valor de la hora")]
         public double? ValorHora { get; set; }
 
         [Display(Name = "Estimado de salarios")]
         public double EstimadoSalarios { get; set; }
-
+        #endregion
         public double TotalHorasMostrar { get; set; }
+
+        #region filtro Tecnico
+        public List<Tecnico> Tecnicos { get; set;}
+
+        [Display(Name ="Tecnico")]
+        public int? TecnicoId { get; set; }
+        #endregion
     }
 }

@@ -11,46 +11,59 @@
     <form asp-action="CalcularTotalHoras" method="post" id="filterForm" class="mb-3">
         <div class="row">
             <div class="col-md-6">
-                <label for="FechaInicio">Fecha de inicio:</label>
-                <input type="date" id="FechaInicio" name="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" required class="form-control">
+                <div class="form-group">
+                    <label for="FechaInicio">Fecha de inicio:</label>
+                    <input type="date" id="FechaInicio" name="FechaInicio" value="@Model.FechaInicio.ToString("yyyy-MM-dd")" required class="form-control">
+                </div>
             </div>
             <div class="col-md-6">
-                <label for="FechaFin">Fecha de fin:</label>
-                <input type="date" id="FechaFin" name="FechaFin" value="@Model.FechaFin.ToString("yyyy-MM-dd")" required class="form-control">
+                <div class="form-group">
+                    <label for="FechaFin">Fecha de fin:</label>
+                    <input type="date" id="FechaFin" name="FechaFin" value="@Model.FechaFin.ToString("yyyy-MM-dd")" required class="form-control">
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <label for="TecnicoId">Técnico:</label>
-            <select id="TecnicoId" name="TecnicoId" asp-for="TecnicoId" class="form-control">
-                <option value="">Seleccione un técnico...</option>
-                @foreach (var tecnico in Model.Tecnicos)
-                {
-                    <option value="@tecnico.Id" selected="@(tecnico.Id == Model.TecnicoId)">@(tecnico.Nombre)</option>
-                }
-            </select>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="TecnicoId">Técnico:</label>
+                    <select id="TecnicoId" name="TecnicoId" asp-for="TecnicoId" class="form-control">
+                        <option value="">Seleccione un técnico...</option>
+                        @foreach (var tecnico in Model.Tecnicos)
+                        {
+                            <option value="@tecnico.Id" selected="@(tecnico.Id == Model.TecnicoId)">@(tecnico.Nombre)</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ValorHora">Valor de la hora:</label>
+                    <input type="number" id="ValorHora" name="ValorHora" value="@Model.ValorHora" step="0.01" class="form-control">
+                </div>
+            </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <label for="ValorHora">Valor de la hora:</label>
-                <input type="number" id="ValorHora" name="ValorHora" value="@Model.ValorHora" step="0.01" class="form-control">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary mt-3">Calcular</button>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Calcular</button>
     </form>
 
-    @if (Model.TotalHorasMostrar > 0)
-    {
-        <div id="totalHorasDiv">
-            <h3>Horas asignadas:</h3>
-            <h4>@Model.TotalHorasMostrar</h4>
-        </div>
-    }
+    <div class="row">
+        @if (Model.TotalHorasMostrar > 0)
+        {
+            <div id="totalHorasDiv" class="col-md-6">
+                <h3>Horas asignadas:</h3>
+                <h4>@Model.TotalHorasMostrar</h4>
+            </div>
+        }
 
-    @if (Model.ValorHora.HasValue && Model.TotalHorasMostrar > 0)
-    {
-        <div id="totalSalariosDiv">
-            <h3>Estimado de salarios:</h3>
-            <h4>$@(Model.TotalHorasMostrar * Model.ValorHora)</h4>
-        </div>
-    }
+        @if (Model.ValorHora.HasValue && Model.TotalHorasMostrar > 0)
+        {
+            <div id="totalSalariosDiv" class="col-md-6">
+                <h3>Estimado de salarios:</h3>
+                <h4>$@(Model.TotalHorasMostrar * Model.ValorHora)</h4>
+            </div>
+        }
+    </div>
+
 </div>

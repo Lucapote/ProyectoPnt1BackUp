@@ -54,7 +54,9 @@ p{
 }
 
 #filterForm input[type="time"],
-#filterForm input[type="date"] {
+#filterForm input[type="date"],
+#filterForm select,
+#filterForm input[type="number"]{
     background-color: #DB995F;
     color: #27241F;
     border: none;
@@ -81,7 +83,12 @@ p{
     border-radius: 5px;
 }
 
-#totalHorasDiv {
+#totalSalariosDiv{
+    margin-left: 20px;
+}
+
+#totalHorasDiv,
+#totalSalariosDiv {
     background-color: #DB995F;
     color: #FFFFFF;
     padding: 10px;
@@ -90,7 +97,8 @@ p{
     width: 336px;
 }
 
-#totalHorasDiv h3 {
+#totalHorasDiv h3,
+#totalSalariosDiv h3{
     margin-top: 0;
     color: #ffffff;
 }

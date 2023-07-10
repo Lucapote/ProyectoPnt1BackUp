@@ -10,5 +10,6 @@
         public const string Salida = "Horario Salida";
         public const string Rol = "Nombre del rol";
         public const string RememberMe = "Recordarme";
+        public const string DropwDown = "Acciones Admin"; 
     }
 }
